@@ -90,7 +90,7 @@ function get_customer_by_id($db, $customer_id) {
 }
 
 function get_service_by_id($db, $service_id) {
-    $cursor = $db->staff->find(array('_id'=>new MongoId($service_id)));
+    $cursor = $db->services->find(array('_id'=>new MongoId($service_id)));
     foreach ($cursor as $service) {
         return $service;
     }

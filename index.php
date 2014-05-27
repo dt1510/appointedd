@@ -14,7 +14,11 @@ class Model {
             $customer=get_customer_by_id($db, $appointment['customer_id']);
             $staff_member=get_staff_member_by_id($db, $appointment['staff_member_id']);
             $service=get_service_by_id($db, $appointment['service_id']);
-            array_push($this->appointments, array($appointment));
+            array_push($this->appointments,
+                array("customer_name"=>$customer["first_name"]." ".$customer["last_name"],
+                "staff_member_name"=>$staff_member["first_name"]." ".$customer["last_name"],
+                "service_name"=>$service["name"])
+            );
         }
         $this->customers=$db->customers->find();        
         $this->staff=$db->staff->find();
@@ -56,7 +60,7 @@ class View {
         $table="<table>";
         foreach($this->model->get_appointments_list() as $appointment) {
             $table.="<tr>";
-                $table.="<td>appointment</id>";
+                $table.="<td>".$appointment["staff_member_name"]."</td><td>".$appointment["customer_name"]."</td><td>".$appointment["service_name"]."</td>";
             $table.="</tr>";
         }
         $table.="</table>";
