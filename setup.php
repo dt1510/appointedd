@@ -38,10 +38,6 @@ try {
     insert_appointment($db, get_customer_id($db,"Alice", "Goldberg"), get_staff_member_id($db,"Joshua", "Eilenberg"),
         (String)$service2['_id'], $time, $time+$service2['duration']*3600);
     
-    var_dump(get_staff_member_id($db,"Adam","Smith"));
-    echo "</br>";
-    //insert_appointment($customer, $staff, $service, $start_time, $end_time, $duration) {
-     
     // disconnect from server
     $conn->close();    
     echo "Done. You can enter new appointments under index.php.</br>";

@@ -23,7 +23,7 @@ function insert_service($db, $name, $duration) {
 #start_time, end_time are unix timestamps in seconds.
 function insert_appointment($db, $customer_id, $staff_id, $service_id, $start_time, $end_time) {
     $collection = $db->appointments;
-    $collection->insert(array('customer'=>$customer_id, 'staff'=>$staff_id, 'service'=>$service_id, 'start_time'=>$start_time, 'end_time'=>$end_time));
+    $collection->insert(array('customer_id'=>$customer_id, 'staff_member_id'=>$staff_id, 'service_id'=>$service_id, 'start_time'=>$start_time, 'end_time'=>$end_time));
     return SUCCESS;
 }
 
@@ -71,6 +71,30 @@ function get_service_duration($db, $name) {
         return (String)$service['duration'];
     }
     return null;            
+}
+
+function get_staff_member_by_id($db, $staff_member_id) {
+    $cursor = $db->staff->find(array('_id'=>new MongoId($staff_member_id)));
+    foreach ($cursor as $staff_member) {
+        return $staff_member;
+    }
+    return null;    
+}
+
+function get_customer_by_id($db, $customer_id) {
+    $cursor = $db->customers->find(array('_id'=>new MongoId($customer_id)));
+    foreach ($cursor as $customer) {
+        return $customer;
+    }
+    return null;    
+}
+
+function get_service_by_id($db, $service_id) {
+    $cursor = $db->staff->find(array('_id'=>new MongoId($service_id)));
+    foreach ($cursor as $service) {
+        return $service;
+    }
+    return null;    
 }
 
 ?>

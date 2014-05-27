@@ -1,16 +1,21 @@
 <?php
 include_once "configuration.php";
+include_once "common.php";
 
 class Model { 
-    public $text;
     private $appointsments;
     private $customers;
     private $staff;
     private $services;
      
     public function __construct($db) { 
-        $this->text = 'Hello world!'; 
-        $this->appointments=$db->appointments->find();
+        $this->appointments=array();
+        foreach($db->appointments->find() as $appointment) {
+            $customer=get_customer_by_id($db, $appointment['customer_id']);
+            $staff_member=get_staff_member_by_id($db, $appointment['staff_member_id']);
+            $service=get_service_by_id($db, $appointment['service_id']);
+            array_push($this->appointments, array($appointment));
+        }
         $this->customers=$db->customers->find();        
         $this->staff=$db->staff->find();
         $this->services=$db->services->find();
@@ -72,7 +77,7 @@ try {
     $conn = new Mongo(MONGODB_LOCATION);
     // access database
     $db = $conn->selectDB(DATABASE_NAME);
-    
+        
     //initiate the triad 
     $model = new Model($db); 
     //It is important that the controller and the view share the model 
