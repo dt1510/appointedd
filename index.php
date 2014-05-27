@@ -1,52 +1,6 @@
 <?php
 include_once "configuration.php";
 
-$debug = false;
- 
-try {
-  // open connection to MongoDB server
-  $conn = new Mongo (MONGODB_LOCATION);
- 
-  // access database
-  $db = $conn->selectDB(DATABASE_NAME);
- 
-  // access collection
-  $collection = $db->users;
-  //$collection->insert(array('username'=>"joe", 'password'=>"infinity123"));
- 
-  // execute query
-  // retrieve all documents
-  $cursor = $collection->find();
- 
-  // iterate through the result set
-  // print each document
-  // echo $cursor->count() . ' document(s) found. <br/>'; 
-  echo $cursor->count()."</br>";  
-  foreach ($cursor as $obj) {
-    //if ($obj['language'] == 'PHP') echo $obj['message_text'];
-    //echo $obj["username"]."</br>";
-    print_r($obj);
-    echo "</br>";
-  }
-  // disconnect from server
-  $conn->close();
-} catch (MongoConnectionException $e) {
-  if ($debug) {
-    print ('Error connecting to MongoDB server: ' . $e->getMessage());
-  } else {
-    print ('Error connecting PHP with MongoDB');
-  }
-} catch (MongoException $e) {  
-  if ($debug) {
-    print ('Error: ' . $e->getMessage());
-  } else {
-    print ('Error connecting PHP with MongoDB');  
-  }
-}
-
-#$response = $db->execute("function() { return 'Hello, world!'; }");
-#echo $response['retval'];
-
 class Model { 
     public $text; 
      

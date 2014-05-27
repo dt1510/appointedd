@@ -2,6 +2,8 @@
 include_once "configuration.php";
 include_once "common.php";
 
+$debug=false;
+
 try {
     echo "Connecting to the database...</br>";
     
