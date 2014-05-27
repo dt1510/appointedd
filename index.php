@@ -17,19 +17,19 @@ class Model {
     }
     
     public function get_appointments_list() {
-        return $appointments;
+        return $this->appointments;
     }
     
     public function get_customers_list() {
-        return $customers;
+        return $this->customers;
     }
     
     public function get_staff_list() {
-        return $staff;
+        return $this->staff;
     }
     
     public function get_services_list() {
-        return $services;
+        return $this->services;
     }
 } 
 
@@ -44,12 +44,12 @@ class View {
     } 
      
     public function output() {
-        return '<h1>' . $this->model->text .'</h1>'; 
+        return $this->get_appointments_table(); 
     } 
     
     public function get_appointments_table() {
         $table="<table>";
-        foreach($model->get_appointments_list() as $appointment) {
+        foreach($this->model->get_appointments_list() as $appointment) {
             $table.="<tr>";
                 $table.="<td>appointment</id>";
             $table.="</tr>";

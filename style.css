@@ -5,3 +5,5 @@ div.entry {padding-bottom:2px;}
 div.wn {color: #777;}
 #panel {float: right;}
 pron {padding-left:1em; color: #aaa;}
+table, th, td{border: 1px solid black;padding:4px;}
+table {border-collapse: collapse;}
