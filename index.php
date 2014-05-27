@@ -1,7 +1,6 @@
 <?php
-include "configuration.php";
+include_once "configuration.php";
 
-#phpinfo();
 $debug = false;
  
 try {
@@ -9,7 +8,7 @@ try {
   $conn = new Mongo (MONGODB_LOCATION);
  
   // access database
-  $db = $conn->selectDB("test2");
+  $db = $conn->selectDB(DATABASE_NAME);
  
   // access collection
   $collection = $db->users;
@@ -43,31 +42,6 @@ try {
   } else {
     print ('Error connecting PHP with MongoDB');  
   }
-}
-
-function insert_customer($db, $first_name, $last_name) {
-    #TODO checking
-    $collection = $db->users;
-    $collection->insert(array('first_name'=>$first_name, 'last_name'=>$last_name));
-    return SUCCESS;
-}
-
-function insert_staff_member($db, $fist_name, $last_name) {
-    $collection = $db->staff;
-    $collection->insert(array('first_name'=>$first_name, 'last_name'=>$last_name));
-    return SUCCESS;
-}
-
-function insert_service($db, $name, $duration) {
-    $collection = $db->services;
-    $collection->insert(array('name'=>$name, 'duration'=>$duration));
-    return SUCCESS;
-}
-
-function insert_appointment($customer, $staff, $service, $start_time, $end_time, $duration) {
-    $collection = $db->appointment;
-    $collection->insert(array('customer'=>$customer, 'staff'=>$staff, 'start_time'=>$start_time, 'end_time'=>$end_time, 'duration'=>$duration));
-    return SUCCESS;
 }
 
 #$response = $db->execute("function() { return 'Hello, world!'; }");
