@@ -1,5 +1,4 @@
 #Appointedd programming challenge
-
 Coding challenge - Create a simple appointment booking system
 
 Tech Specs:
@@ -25,4 +24,9 @@ Bonus features:
 
 - Not all staff members can perform all services
 - Prevent double bookings
+
+#Tasks
+
+#p3
+Prevent inserting duplicates into db.
 

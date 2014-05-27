@@ -17,7 +17,7 @@ try {
     $db->services->drop();
     $db->appointment->drop();
     
-    echo "Seeding the examples...</br>";s
+    echo "Seeding the examples...</br>";
     insert_customer($db, "David", "Jackson");
     insert_customer($db, "Alice", "Goldberg");
     insert_customer($db, "Matthew", "Jones");
@@ -27,6 +27,11 @@ try {
     insert_service($db, "haircut", 20);
     insert_service($db, "hair styling", 30);
     insert_service($db, "dog walking", 90);
+    
+    $id=get_customer_id($db,"David","Jackson");
+    echo (String)$id."</br>";
+    var_dump(get_customer_id($db,"David","Jackson"));
+    echo "</br>";
     //insert_appointment($customer, $staff, $service, $start_time, $end_time, $duration) {
      
     // disconnect from server
