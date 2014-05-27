@@ -8,7 +8,7 @@ try {
     echo "Connecting to the database...</br>";
     
     // open connection to MongoDB server
-    $conn = new Mongo (MONGODB_LOCATION);
+    $conn = new Mongo(MONGODB_LOCATION);
 
     // access database
     $db = $conn->selectDB(DATABASE_NAME);
@@ -51,12 +51,14 @@ try {
     } else {
         print ('Error connecting PHP with MongoDB');
     }
+    exit(FAILURE);
 } catch (MongoException $e) {  
     if ($debug) {
         print ('Error: ' . $e->getMessage());
     } else {
         print ('Error connecting PHP with MongoDB');  
     }
+    exit(FAILURE);
 }
 
 ?>
