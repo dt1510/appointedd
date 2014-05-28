@@ -16,7 +16,6 @@ $view = new View($controller, $model);
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" type="text/css" href="style2.css">
 <link rel="stylesheet" type="text/css" href="demo.css">
 <link rel="stylesheet" type="text/css" href="jquery-ui-1.10.4.custom.min.css">
 <link rel="stylesheet" type="text/css" href="jquery-ui-timepicker-addon.css">
