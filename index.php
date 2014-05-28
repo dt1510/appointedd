@@ -23,16 +23,34 @@ class Model {
                 )
             );
         }
-        $this->customers=$db->customers->find();        
-        $this->staff=$db->staff->find();
-        $this->services=$db->services->find();
+        
+        $this->customers=array();        
+        foreach($db->customers->find() as $customer) {
+            array_push($this->customers,
+                array("id"=>(String)$customer["_id"],
+                "name"=>$customer["first_name"]." ".$customer["last_name"]));
+        }
+        
+        $this->staff=array();
+        foreach($db->staff->find() as $staff_member) {
+            array_push($this->staff,
+                array("id"=>(String)$staff_member["_id"],
+                "name"=>$staff_member["first_name"]." ".$staff_member["last_name"]));
+        }
+        
+        $this->services=array();
+        foreach($db->services->find() as $service) {
+            array_push($this->services,
+                array("id"=>(String)$service["_id"],
+                "name"=>$service["name"]));
+        }        
     }
     
     public function get_appointments_list() {
         return $this->appointments;
     }
     
-    public function get_customers_list() {
+    public function get_customers_list() {;
         return $this->customers;
     }
     
@@ -56,10 +74,11 @@ class View {
     } 
      
     public function output() {
-        return $this->get_appointments_table(); 
+        return $this->appointments_table().
+                $this->add_appointment_form(); 
     } 
     
-    public function get_appointments_table() {
+    public function appointments_table() {
         $table="<table>";
         $table.="<tr><td>Staff member</td><td>Customer</td><td>Service</td><td>Start time</td><td>End time</td></tr>";        
         foreach($this->model->get_appointments_list() as $appointment) {
@@ -73,13 +92,45 @@ class View {
         $table.="</table>";
         return $table;
     }
+    
+    private function select($options) {
+        $select="<select>";
+        foreach($options as $option) {
+            $select.="<option value='".$option['id']."'>".$option['name']."</option>";
+        }
+        $select.="</select>";
+        return $select;
+    }
+    
+    private function customer_select() {
+        return $this->select($this->model->get_customers_list());
+    }
+    
+    private function staff_member_select() {
+        return $this->select($this->model->get_staff_list());
+    }
+    
+    private function service_select() {
+        return $this->select($this->model->get_services_list());
+    }
+    
+    private function add_appointment_form() {
+        $form="<form method='post' action=''>";
+        $form.='Customer '.$this->customer_select().' ';
+        $form.='Staff member '.$this->staff_member_select().' ';
+        $form.='Service'.$this->service_select().' ';
+        $form.='Start time <input name="start_time_timestamp" value="'.time().'"/>';
+        $form.='<input type="submit" value="Submit">';
+        $form.="</form>";
+        return $form;
+    }
 } 
 
 class Controller { 
     private $model; 
 
     public function __construct(Model $model) { 
-        $this->model = $model; 
+        $this->model = $model;
     } 
 } 
 
