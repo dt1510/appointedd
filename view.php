@@ -14,9 +14,9 @@ class View {
      
     public function output() {
         $this->controller->load();
-        return $this->appointments_table().
-                $this->add_appointment_form().
-                $this->errors(); 
+        return $this->add_appointment_form().
+                $this->errors().
+                $this->appointments_table();
     } 
     
     private function appointments_table() {
