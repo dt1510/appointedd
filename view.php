@@ -34,7 +34,7 @@ class View {
     }
     
     private function select($selection_name, $options) {
-        $select="<select name='$selection_name"."_id"."'>";
+        $select="<select name='$selection_name'>";
         foreach($options as $option) {
             $select.="<option value='".$option['id']."'>".$option['name']."</option>";
         }
