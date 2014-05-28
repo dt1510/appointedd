@@ -17,7 +17,10 @@ class Model {
             array_push($this->appointments,
                 array("customer_name"=>$customer["first_name"]." ".$customer["last_name"],
                 "staff_member_name"=>$staff_member["first_name"]." ".$customer["last_name"],
-                "service_name"=>$service["name"])
+                "service_name"=>$service["name"],
+                "start_time"=>$appointment['start_time'],
+                "end_time"=>$appointment['end_time']
+                )
             );
         }
         $this->customers=$db->customers->find();        
@@ -58,9 +61,13 @@ class View {
     
     public function get_appointments_table() {
         $table="<table>";
+        $table.="<tr><td>Staff member</td><td>Customer</td><td>Service</td><td>Start time</td><td>End time</td></tr>";        
         foreach($this->model->get_appointments_list() as $appointment) {
             $table.="<tr>";
                 $table.="<td>".$appointment["staff_member_name"]."</td><td>".$appointment["customer_name"]."</td><td>".$appointment["service_name"]."</td>";
+                $start_time=new DateTime("@".$appointment['start_time']);
+                $end_time=new DateTime("@".$appointment['end_time']);
+                $table.="<td>".$start_time->format(DATETIME_FORMAT)."</td><td>".$end_time->format(DATETIME_FORMAT)."</td>";
             $table.="</tr>";
         }
         $table.="</table>";
