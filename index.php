@@ -15,10 +15,10 @@ $view = new View($controller, $model);
 
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" type="text/css" href="demo.css">
-<link rel="stylesheet" type="text/css" href="jquery-ui-1.10.4.custom.min.css">
-<link rel="stylesheet" type="text/css" href="jquery-ui-timepicker-addon.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/demo.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.custom.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-timepicker-addon.css">
 <script src="jquery-2.0.2.min.js"></script>
 <script src="jquery-ui-1.10.4.custom.min.js"></script>
 <script src="jquery-ui-timepicker-addon.js"></script>
