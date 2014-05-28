@@ -73,10 +73,10 @@ class View {
         $form.='Customer '.$this->customer_select().' ';
         $form.='Staff member '.$this->staff_member_select().' ';
         $form.='Service'.$this->service_select().' ';
-        $form.='Start time <input id="datetime" name="start_time" />';
+        $form.='Start time <input id="datetime" name="start_time" value="now" />';
         $form.='<input type="submit" value="Add appointment">';
         $form.="</form>";
-        $form.="<script>$('#datetime').datetimepicker({dateFormat: 'dd/mm/yy', timeFormat: 'HH:mm' });</script>";
+        $form.="<script>$('#datetime').datetimepicker({dateFormat: 'dd-mm-yy', timeFormat: 'HH:mm' });</script>";
         return $form;
     }
 } 

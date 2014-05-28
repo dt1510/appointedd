@@ -89,9 +89,9 @@ class Model {
         }        
     }
     
-    public function add_appointment($staff_member_id, $customer_id, $service_id, $start_time_timestamp) {
+    public function add_appointment($staff_member_id, $customer_id, $service_id, $start_time) {
         if(is_permitted($this->db, $staff_member_id, $service_id)) {
-            insert_appointment($this->db, $customer_id, $staff_member_id, $service_id, $start_time_timestamp);
+            insert_appointment($this->db, $customer_id, $staff_member_id, $service_id, strtotime($start_time));
             return SUCCESS;
         } else {
             $this->add_error("A staff member not permitted to provide the selected service.");
