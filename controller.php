@@ -31,6 +31,10 @@ class Controller {
             exit(FAILURE);
         }
     }
+    
+    public function add_appointment() {
+        $this->model->add_appointment($_POST['staff_member_id'], $_POST['customer_id'], $_POST['service'], $_POST['start_time_timestamp']);
+    }
 } 
 
     //initiate the triad 

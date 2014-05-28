@@ -28,8 +28,8 @@ class View {
         return $table;
     }
     
-    private function select($options) {
-        $select="<select>";
+    private function select($selection_name, $options) {
+        $select="<select name='$selection_name'>";
         foreach($options as $option) {
             $select.="<option value='".$option['id']."'>".$option['name']."</option>";
         }
@@ -38,15 +38,15 @@ class View {
     }
     
     private function customer_select() {
-        return $this->select($this->model->get_customers_list());
+        return $this->select("customer_id",$this->model->get_customers_list());
     }
     
     private function staff_member_select() {
-        return $this->select($this->model->get_staff_list());
+        return $this->select("staff_member_id",$this->model->get_staff_list());
     }
     
     private function service_select() {
-        return $this->select($this->model->get_services_list());
+        return $this->select("service_id",$this->model->get_services_list());
     }
     
     private function add_appointment_form() {
