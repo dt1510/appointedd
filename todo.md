@@ -22,8 +22,5 @@ Solution:
 
 Bonus features:
 
-- Not all staff members can perform all services
-- Prevent double bookings
-
-#Tasks
-
+- Not all staff members can perform all services (done)
+- Prevent double bookings (not done)

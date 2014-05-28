@@ -19,9 +19,9 @@ $view = new View($controller, $model);
 <link rel="stylesheet" type="text/css" href="css/demo.css">
 <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.custom.min.css">
 <link rel="stylesheet" type="text/css" href="css/jquery-ui-timepicker-addon.css">
-<script src="jquery-2.0.2.min.js"></script>
-<script src="jquery-ui-1.10.4.custom.min.js"></script>
-<script src="jquery-ui-timepicker-addon.js"></script>
+<script src="js/jquery-2.0.2.min.js"></script>
+<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="js/jquery-ui-timepicker-addon.js"></script>
 </head>
 <body>
 <h1>Simple appointment booking system</h1>
