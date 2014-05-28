@@ -17,7 +17,7 @@ class Model {
             $service=get_service_by_id($db, $appointment['service_id']);
             array_push($this->appointments,
                 array("customer_name"=>$customer["first_name"]." ".$customer["last_name"],
-                "staff_member_name"=>$staff_member["first_name"]." ".$customer["last_name"],
+                "staff_member_name"=>$staff_member["first_name"]." ".$staff_member["last_name"],
                 "service_name"=>$service["name"],
                 "start_time"=>$appointment['start_time'],
                 "end_time"=>$appointment['end_time']
