@@ -5,42 +5,14 @@ class Controller {
 
     public function __construct(Model $model) { 
         $this->model = $model;
-        
-        try {
-            // open connection to MongoDB server
-            $conn = new Mongo(MONGODB_LOCATION);
-            // access database
-            $db = $conn->selectDB(DATABASE_NAME);
-            $this->model->load($db);
-            
-            // disconnect from server
-            $conn->close();    
-        } catch (MongoConnectionException $e) {
-            if ($debug) {
-                print ('Error connecting to MongoDB server: ' . $e->getMessage());
-            } else {
-                print ('Error connecting PHP with MongoDB');
-            }
-            exit(FAILURE);
-        } catch (MongoException $e) {  
-            if ($debug) {
-                print ('Error: ' . $e->getMessage());
-            } else {
-                print ('Error connecting PHP with MongoDB');  
-            }
-            exit(FAILURE);
-        }
+    }
+    
+    public function load() {
+        $this->model->load();
     }
     
     public function add_appointment() {
-        $this->model->add_appointment($_POST['staff_member_id'], $_POST['customer_id'], $_POST['service'], $_POST['start_time_timestamp']);
+        $this->model->add_appointment($_POST['staff_member_id'], $_POST['customer_id'], $_POST['service_id'], $_POST['start_time_timestamp']);
     }
-} 
-
-    //initiate the triad 
-    $model = new Model();
-    //It is important that the controller and the view share the model 
-    $controller = new Controller($model); 
-    $view = new View($controller, $model);
-
+}
 ?>

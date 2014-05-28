@@ -5,16 +5,46 @@ class Model {
     private $customers;
     private $staff;
     private $services;
+    private $conn;
+    private $db;
      
-    public function __construct() { 
+    public function __construct() {
+    
+        $debug=false;
+        try {
+            // open connection to MongoDB server
+            $this->conn = new Mongo(MONGODB_LOCATION);
+            // access database
+            $this->db = $this->conn->selectDB(DATABASE_NAME);            
+        } catch (MongoConnectionException $e) {
+            if ($debug) {
+                print ('Error connecting to MongoDB server: ' . $e->getMessage());
+            } else {
+                print ('Error connecting PHP with MongoDB');
+            }
+            exit(FAILURE);
+        } catch (MongoException $e) {
+            if ($debug) {
+                print ('Error: ' . $e->getMessage());
+            } else {
+                print ('Error connecting PHP with MongoDB');
+            }
+            exit(FAILURE);
+        }
+
     }
     
-    public function load($db) {
+    public function __destruct() {
+        // disconnect from server
+        $this->conn->close();
+    }
+    
+    public function load() {
         $this->appointments=array();
-        foreach($db->appointments->find() as $appointment) {
-            $customer=get_customer_by_id($db, $appointment['customer_id']);
-            $staff_member=get_staff_member_by_id($db, $appointment['staff_member_id']);
-            $service=get_service_by_id($db, $appointment['service_id']);
+        foreach($this->db->appointments->find() as $appointment) {
+            $customer=get_customer_by_id($this->db, $appointment['customer_id']);
+            $staff_member=get_staff_member_by_id($this->db, $appointment['staff_member_id']);
+            $service=get_service_by_id($this->db, $appointment['service_id']);
             array_push($this->appointments,
                 array("customer_name"=>$customer["first_name"]." ".$customer["last_name"],
                 "staff_member_name"=>$staff_member["first_name"]." ".$staff_member["last_name"],
@@ -26,21 +56,21 @@ class Model {
         }                
         
         $this->customers=array();        
-        foreach($db->customers->find() as $customer) {
+        foreach($this->db->customers->find() as $customer) {
             array_push($this->customers,
                 array("id"=>(String)$customer["_id"],
                 "name"=>$customer["first_name"]." ".$customer["last_name"]));
         }
         
         $this->staff=array();
-        foreach($db->staff->find() as $staff_member) {
+        foreach($this->db->staff->find() as $staff_member) {
             array_push($this->staff,
                 array("id"=>(String)$staff_member["_id"],
                 "name"=>$staff_member["first_name"]." ".$staff_member["last_name"]));
         }
         
         $this->services=array();
-        foreach($db->services->find() as $service) {
+        foreach($this->db->services->find() as $service) {
             array_push($this->services,
                 array("id"=>(String)$service["_id"],
                 "name"=>$service["name"]));

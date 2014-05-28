@@ -5,15 +5,20 @@ class View {
      
     public function __construct(Controller $controller, Model $model) { 
         $this->controller = $controller; 
-        $this->model = $model; 
+        $this->model = $model;
+        
+        if(@$_GET['request']=="add_appointment") {
+            $this->controller->add_appointment();
+        }
     } 
      
     public function output() {
+        $this->controller->load();
         return $this->appointments_table().
                 $this->add_appointment_form(); 
     } 
     
-    public function appointments_table() {
+    private function appointments_table() {
         $table="<table>";
         $table.="<tr><td>Staff member</td><td>Customer</td><td>Service</td><td>Start time</td><td>End time</td></tr>";        
         foreach($this->model->get_appointments_list() as $appointment) {
@@ -29,7 +34,7 @@ class View {
     }
     
     private function select($selection_name, $options) {
-        $select="<select name='$selection_name'>";
+        $select="<select name='$selection_name"."_id"."'>";
         foreach($options as $option) {
             $select.="<option value='".$option['id']."'>".$option['name']."</option>";
         }
@@ -50,7 +55,7 @@ class View {
     }
     
     private function add_appointment_form() {
-        $form="<form method='post' action=''>";
+        $form="<form method='post' action='index.php?request=add_appointment'>";
         $form.='Customer '.$this->customer_select().' ';
         $form.='Staff member '.$this->staff_member_select().' ';
         $form.='Service'.$this->service_select().' ';
