@@ -21,7 +21,7 @@ function insert_service($db, $name, $duration) {
 }
 
 #start_time, end_time are unix timestamps in seconds.
-function insert_appointment($db, $customer_id, $staff_id, $service_id, $start_time_timestamp) {    
+function insert_appointment($db, $customer_id, $staff_id, $service_id, $start_time_timestamp) {
     $service=get_service_by_id($db, $service_id);
     $collection = $db->appointments;
     $collection->insert(array('customer_id'=>$customer_id, 'staff_member_id'=>$staff_id, 'service_id'=>$service_id,

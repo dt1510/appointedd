@@ -78,7 +78,7 @@ class Model {
     }
     
     public function add_appointment($staff_member_id, $customer_id, $service_id, $start_time_timestamp) {
-        insert_appointment($this->db, $staff_member_id, $customer_id, $service_id, $start_time_timestamp);
+        insert_appointment($this->db, $customer_id, $staff_member_id, $service_id, $start_time_timestamp);
     }
     
     public function get_appointments_list() {
