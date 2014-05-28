@@ -15,7 +15,8 @@ class View {
     public function output() {
         $this->controller->load();
         return $this->appointments_table().
-                $this->add_appointment_form(); 
+                $this->add_appointment_form().
+                $this->errors(); 
     } 
     
     private function appointments_table() {
@@ -31,6 +32,19 @@ class View {
         }
         $table.="</table>";
         return $table;
+    }
+    
+    private function errors() {
+        if($this->model->has_errors()) {
+            $errors="<div class='error'>";
+            foreach($this->model->errors() as $error) {
+                $errors.="<p>$error</p>";
+            }
+            $errors.="</div>";
+            return $errors;
+        } else {
+            return "";
+        }
     }
     
     private function select($selection_name, $options) {

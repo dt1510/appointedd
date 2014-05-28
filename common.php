@@ -108,7 +108,6 @@ function insert_service_permission($db, $staff_member_id, $service_id) {
 
 function is_permitted($db, $staff_member_id, $service_id) {
     $cursor = $db->service_permissions->find(array('staff_member_id'=>$staff_member_id, 'service_id'=>$service_id));    
-    echo $cursor->count();
     foreach ($cursor as $permission) {
         return true;
     }

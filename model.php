@@ -7,6 +7,7 @@ class Model {
     private $services;
     private $conn;
     private $db;
+    private $error_messages=array();
      
     public function __construct() {
     
@@ -36,6 +37,18 @@ class Model {
     public function __destruct() {
         // disconnect from server
         $this->conn->close();
+    }
+    
+    public function errors() {
+        return $this->error_messages;
+    }
+    
+    public function has_errors() {
+        return count($this->error_messages)>0;
+    }
+    
+    private function add_error($error_message) {
+        array_push($this->error_messages, $error_message);
     }
     
     public function load() {
@@ -77,7 +90,13 @@ class Model {
     }
     
     public function add_appointment($staff_member_id, $customer_id, $service_id, $start_time_timestamp) {
-        insert_appointment($this->db, $customer_id, $staff_member_id, $service_id, $start_time_timestamp);
+        if(is_permitted($this->db, $staff_member_id, $service_id)) {
+            insert_appointment($this->db, $customer_id, $staff_member_id, $service_id, $start_time_timestamp);
+            return SUCCESS;
+        } else {
+            $this->add_error("A staff member not permitted to provide the selected service.");
+            return FAILURE;
+        }
     }
     
     public function get_appointments_list() {
