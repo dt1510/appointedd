@@ -31,7 +31,6 @@ class Model {
             }
             exit(FAILURE);
         }
-
     }
     
     public function __destruct() {

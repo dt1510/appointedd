@@ -27,6 +27,3 @@ Bonus features:
 
 #Tasks
 
-#p3
-Prevent inserting duplicates into db.
-

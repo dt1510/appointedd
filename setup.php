@@ -18,6 +18,7 @@ try {
     $db->staff->drop();
     $db->services->drop();
     $db->appointments->drop();
+    $db->service_permissions->drop();
     
     echo "Seeding the examples...</br>";
     insert_customer($db, "David", "Jackson");
@@ -29,13 +30,16 @@ try {
     insert_service($db, "haircut", 20*60);
     insert_service($db, "hair styling", 30*60);
     insert_service($db, "dog walking", 90*60);
+    insert_service_permission($db, get_staff_member_id($db, "Adam", "Smith"), get_service_id($db, "haircut"));
+    insert_service_permission($db, get_staff_member_id($db, "Joshua", "Eilenberg"), get_service_id($db, "hair styling"));
+    insert_service_permission($db, get_staff_member_id($db, "Joshua", "Eilenberg"), get_service_id($db, "massage"));
     
     $time=time();
     $service1=get_service($db,"haircut");
     $service2=get_service($db,"hair styling");
-    insert_appointment($db, get_customer_id($db,"David", "Jackson"), get_staff_member_id($db,"Adam", "Smith"),
+    insert_appointment($db, get_customer_id($db, "David", "Jackson"), get_staff_member_id($db, "Adam", "Smith"),
         (String)$service1['_id'], $time);
-    insert_appointment($db, get_customer_id($db,"Alice", "Goldberg"), get_staff_member_id($db,"Joshua", "Eilenberg"),
+    insert_appointment($db, get_customer_id($db, "Alice", "Goldberg"), get_staff_member_id($db, "Joshua", "Eilenberg"),
         (String)$service2['_id'], $time);
     
     // disconnect from server
