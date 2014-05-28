@@ -31,7 +31,7 @@ class Model {
                 print ('Error connecting PHP with MongoDB');
             }
             exit(FAILURE);
-        }
+        }       
     }
     
     public function __destruct() {

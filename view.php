@@ -74,7 +74,7 @@ class View {
         $form.='Staff member '.$this->staff_member_select().' ';
         $form.='Service'.$this->service_select().' ';
         $form.='Start time <input name="start_time_timestamp" value="'.time().'"/>';
-        $form.='<input type="submit" value="Submit">';
+        $form.='<input type="submit" value="Add appointment">';
         $form.="</form>";
         return $form;
     }
