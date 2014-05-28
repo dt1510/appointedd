@@ -6,7 +6,10 @@ class Model {
     private $staff;
     private $services;
      
-    public function __construct($db) { 
+    public function __construct() { 
+    }
+    
+    public function load($db) {
         $this->appointments=array();
         foreach($db->appointments->find() as $appointment) {
             $customer=get_customer_by_id($db, $appointment['customer_id']);
@@ -20,7 +23,7 @@ class Model {
                 "end_time"=>$appointment['end_time']
                 )
             );
-        }
+        }                
         
         $this->customers=array();        
         foreach($db->customers->find() as $customer) {
